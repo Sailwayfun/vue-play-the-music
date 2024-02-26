@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import AppHeader from './components/AppHeader.vue'
 import AppAuth from './components/AppAuth.vue'
+import { useModalStore } from './stores/modal'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
+
+const { isModalShown } = storeToRefs(useModalStore())
+
+const hiddenClass = computed(() => {
+  return isModalShown ? '' : 'hidden'
+})
 </script>
 
 <template>
@@ -271,7 +280,7 @@ import AppAuth from './components/AppAuth.vue'
   </div>
 
   <!-- Auth Modal -->
-  <app-auth />
+  <app-auth v-if="isModalShown" />
 </template>
 
 <style scoped></style>
