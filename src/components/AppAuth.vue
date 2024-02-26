@@ -144,10 +144,10 @@
 import { computed } from 'vue'
 import { useModalStore } from '@/stores/modal'
 import { storeToRefs } from 'pinia'
-const { isModalShown } = storeToRefs(useModalStore())
+const { isModalShown: isModalOpen } = storeToRefs(useModalStore())
 const { toggleAuthModal } = useModalStore()
 
 const hiddenClass = computed(() => {
-  return isModalShown ? '' : 'hidden'
+  return isModalOpen ? '' : 'hidden'
 })
 </script>
