@@ -3,7 +3,6 @@ import AppHeader from './components/AppHeader.vue'
 import AppAuth from './components/AppAuth.vue'
 import { useModalStore } from './stores/modal'
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
 
 const { isModalShown } = storeToRefs(useModalStore())
 </script>
