@@ -6,10 +6,6 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
 const { isModalShown } = storeToRefs(useModalStore())
-
-const hiddenClass = computed(() => {
-  return isModalShown ? '' : 'hidden'
-})
 </script>
 
 <template>
