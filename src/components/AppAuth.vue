@@ -28,18 +28,26 @@
           <ul class="flex flex-wrap mb-4">
             <li class="flex-auto text-center">
               <a
-                class="block rounded py-3 px-4 transition hover:text-white text-white bg-blue-600"
+                class="block rounded py-3 px-4 transition"
                 href="#"
+                @click.prevent="tab = 'login'"
+                :class="loginTabStyles"
                 >Login</a
               >
             </li>
             <li class="flex-auto text-center">
-              <a class="block rounded py-3 px-4 transition" href="#">Register</a>
+              <a
+                class="block rounded py-3 px-4 transition"
+                href="#"
+                @click.prevent="tab = 'register'"
+                :class="registerTabStyles"
+                >Register</a
+              >
             </li>
           </ul>
 
           <!-- Login Form -->
-          <form>
+          <form v-show="tab === 'login'">
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
@@ -66,7 +74,7 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <form>
+          <form v-show="tab === 'register'">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -141,7 +149,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useModalStore } from '@/stores/modal'
 import { storeToRefs } from 'pinia'
 const { isModalShown: isModalOpen } = storeToRefs(useModalStore())
@@ -149,5 +157,16 @@ const { toggleAuthModal } = useModalStore()
 
 const hiddenClass = computed(() => {
   return isModalOpen ? '' : 'hidden'
+})
+
+const tab = ref('login')
+
+const loginTabStyles = computed(() => {
+  return tab.value === 'login' ? 'hover:text-white text-white bg-blue-600' : 'hover:text-blue-600'
+})
+const registerTabStyles = computed(() => {
+  return tab.value === 'register'
+    ? 'hover:text-white text-white bg-blue-600'
+    : 'hover:text-blue-600'
 })
 </script>
