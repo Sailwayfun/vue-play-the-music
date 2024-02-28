@@ -173,7 +173,7 @@ const registerTabStyles = computed(() => {
 })
 
 const schema = {
-  name: 'required',
+  name: 'required|min:3|max: 20|alpha_spaces',
   email: '',
   age: '',
   password: '',
