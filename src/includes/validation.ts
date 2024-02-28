@@ -1,5 +1,5 @@
 import { type App } from 'vue'
-import { required, min, max, alpha_spaces as alphaSpaces } from '@vee-validate/rules'
+import { required, min, max, alpha_spaces as alphaSpaces, email } from '@vee-validate/rules'
 import { Form as VeeForm, Field as VeeField, defineRule, ErrorMessage } from 'vee-validate'
 
 export default {
@@ -12,5 +12,6 @@ export default {
     defineRule('min', min)
     defineRule('max', max)
     defineRule('alpha_spaces', alphaSpaces)
+    defineRule('email', email)
   }
 }
