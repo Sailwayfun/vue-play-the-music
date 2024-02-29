@@ -1,6 +1,22 @@
 import { type App } from 'vue'
-import { required, min, max, alpha_spaces as alphaSpaces, email } from '@vee-validate/rules'
-import { Form as VeeForm, Field as VeeField, defineRule, ErrorMessage } from 'vee-validate'
+import {
+  required,
+  min,
+  max,
+  alpha_spaces as alphaSpaces,
+  email,
+  between,
+  confirmed
+} from '@vee-validate/rules'
+import {
+  Form as VeeForm,
+  Field as VeeField,
+  defineRule,
+  configure,
+  ErrorMessage
+} from 'vee-validate'
+
+// import { localize } from '@vee-validate/i18n'
 
 export default {
   install(app: App) {
@@ -13,5 +29,16 @@ export default {
     defineRule('max', max)
     defineRule('alpha_spaces', alphaSpaces)
     defineRule('email', email)
+    defineRule('between', between)
+    defineRule('confirmed', confirmed)
+
+    configure({
+      generateMessage: (ctx) => {
+        if (ctx.field === 'confirm_password') {
+          return 'The passwords do not match. Please check again!'
+        }
+        return `${ctx.field} is invalid`
+      }
+    })
   }
 }
