@@ -74,7 +74,7 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <vee-form v-show="tab === 'register'" :validation-schema="schema">
+          <vee-form v-show="tab === 'register'" :validation-schema="schema" @submit="register">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -150,7 +150,7 @@
                 <vee-field
                   type="checkbox"
                   name="tos"
-                  value=""
+                  value="1"
                   class="w-4 h-4 float-left -ml-6 mt-1 rounded"
                 />
                 <label class="inline-block">Accept terms of service</label>
@@ -178,6 +178,16 @@ import { storeToRefs } from 'pinia'
 const { isModalShown: isModalOpen } = storeToRefs(useModalStore())
 const { toggleAuthModal } = useModalStore()
 
+interface FormData {
+  age: number
+  confirm_password: string
+  country: string
+  email: string
+  name: string
+  password: string
+  tos: string
+}
+
 const hiddenClass = computed(() => {
   return isModalOpen ? '' : 'hidden'
 })
@@ -192,6 +202,10 @@ const registerTabStyles = computed(() => {
     ? 'hover:text-white text-white bg-blue-600'
     : 'hover:text-blue-600'
 })
+
+function register(values: FormData) {
+  console.log(values)
+}
 
 const schema = {
   name: 'required|min:3|max: 20|alpha_spaces',
