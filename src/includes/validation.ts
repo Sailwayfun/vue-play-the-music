@@ -6,7 +6,8 @@ import {
   alpha_spaces as alphaSpaces,
   email,
   between,
-  confirmed
+  confirmed,
+  not_one_of as excluded
 } from '@vee-validate/rules'
 import {
   Form as VeeForm,
@@ -31,11 +32,18 @@ export default {
     defineRule('email', email)
     defineRule('between', between)
     defineRule('confirmed', confirmed)
+    defineRule('excluded', excluded)
 
     configure({
       generateMessage: (ctx) => {
-        if (ctx.field === 'confirm_password') {
+        if (ctx.field === 'tos') {
+          return 'Please make sure you agree our terms of service'
+        } else if (ctx.field === 'confirm_password') {
           return 'The passwords do not match. Please check again!'
+        } else if (ctx?.rule?.name === 'required' && !ctx.value) {
+          return `${ctx.field} is required`
+        } else if (ctx?.rule?.name === 'excluded') {
+          return `Sorry. Service is not available in ${ctx.value}`
         }
         return `${ctx.field} is invalid`
       }

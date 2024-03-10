@@ -132,18 +132,31 @@
             <!-- Country -->
             <div class="mb-3">
               <label class="inline-block mb-2">Country</label>
-              <select
+              <vee-field
+                as="select"
+                name="country"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
               >
                 <option value="USA">USA</option>
                 <option value="Mexico">Mexico</option>
                 <option value="Germany">Germany</option>
-              </select>
+                <option value="Antarctica">Antarctica</option>
+              </vee-field>
+              <error-message name="country" class="text-red-600" />
             </div>
             <!-- TOS -->
-            <div class="mb-3 pl-6">
-              <input type="checkbox" class="w-4 h-4 float-left -ml-6 mt-1 rounded" />
-              <label class="inline-block">Accept terms of service</label>
+            <div class="mb-3 pl-6 flex flex-col">
+              <div class="flex gap-2">
+                <vee-field
+                  type="checkbox"
+                  name="tos"
+                  value=""
+                  class="w-4 h-4 float-left -ml-6 mt-1 rounded"
+                />
+                <label class="inline-block">Accept terms of service</label>
+              </div>
+
+              <error-message name="tos" class="text-red-600" />
             </div>
             <button
               type="submit"
@@ -186,7 +199,7 @@ const schema = {
   age: 'required|between:10, 100',
   password: 'required|min:6|max:20',
   confirm_password: 'confirmed:@password',
-  country: '',
-  tos: ''
+  country: 'required|excluded:Antarctica',
+  tos: 'required'
 }
 </script>
